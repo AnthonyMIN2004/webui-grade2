@@ -7,4 +7,4 @@ const target = document.getElementById("target");
 target.textContent = "こんにちは！";
 target.style.color = "red"; 
 target.style.fontSize = "10px";
-target.style.backgroundColor = "yellow"; 
+target.style.backgroundColor = "red"; 
