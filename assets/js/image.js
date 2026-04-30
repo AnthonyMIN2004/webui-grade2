@@ -1,4 +1,6 @@
-let isCat = true;
+let name = "shiro"; 
+let isCat = false  ;
+
 
 function changePic() {
   const img = document.getElementById('myImage');
@@ -9,3 +11,4 @@ function changePic() {
   }
   isCat = !isCat;
 }
+setInterval(changePic, 1000);  
