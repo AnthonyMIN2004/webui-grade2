@@ -1,25 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
-</head>
-<body>
-    <header class="site-header">
-        <h1 class="site-header__title">Welcome to My Website</h1>
-        <div class="site-header__right">
-            <button id="theme-toggle" class="btn">テーマ切替</button>
-            <nav>
-                <ul class="site-nav__list">
-                    <li><a class="site-nav__link" href="#home">Home</a></li>
-                    <li><a class="site-nav__link" href="#about">About</a></li>
-                    <li><a class="site-nav__link" href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <script src="js/theme.js"></script>
-</body>
+<html>
+  <head>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>My Website</title>
+  </head>
+  
+  <body>
+    <section>
+      <h1>welcome to my world</h1>
+      <button onclick="HelloOsaka()">click</button>
+      <button onclick="Function_NAME()">text</button>
+    </section>
+
+    <!-- counter section -->
+    <section>
+      <p id="counterValue">0</p>
+      <button onclick="decrementCounter()">-</button>
+      <button onclick="incrementCounter()">+</button>
+      <button onclick="reset()">Reset</button>
+    </section>
+
+    <!-- image section -->
+
+    <section>
+      <img id="myImage" src="assets/images/cat.jpg" width="320" />
+      <button onclick="changePic()">切替</button>
+    </section>
+
+    <script src="assets/js/image.js"></script>
+    <script src="assets/js/counter.js"></script>
+      <script src="assets/js/main.js"></script>
+  </body>
 </html>
