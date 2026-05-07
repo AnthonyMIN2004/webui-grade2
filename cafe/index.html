@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!-- 
+  =====================================================
+  index.html — The main HTML structure for Cafe OCC
+  =====================================================
+  This file contains only the content (structure).
+  Styling  → style.css   (linked in <head>)
+  Behavior → script.js   (linked at bottom of <body>)
+
+  PAGE SECTIONS:
+    1. Header   → fixed top bar (logo + nav + theme button)
+    2. Hero     → big photo + catchphrase
+    3. About    → café concept text + photo
+    4. Menu     → recommend banner + 5 menu cards
+    5. Access   → address, hours, map
+    6. Footer   → bottom bar with links + copyright
+    7. FAB      → floating pencil button (bottom-left)
+  =====================================================
+-->
+<html lang="ja">
+
+<head>
+  <!-- Page settings -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe OCC</title>
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&display=swap"
+    rel="stylesheet"
+  >
+
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================================================
+       1. HEADER
+       Fixed top bar. Stays visible while scrolling.
+       Contains: Logo (left) | Nav links (center) | Theme button (right)
+  ================================================ -->
+  <header id="site-header">
+
+    <!-- Logo — clicking takes you back to the top of the page -->
+    <a class="nav-logo" href="#top">Cafe OCC</a>
+
+    <!-- Navigation links -->
+    <!-- href="#about" = jump to the element with id="about" -->
+    <nav>
+      <a href="#about">about</a>
+      <a href="#menu">menu</a>
+      <a href="#access">access</a>
+    </nav>
+
+    <!-- Dark/light mode toggle button -->
+    <!-- id="themeBtn" → JavaScript in script.js listens for clicks on this -->
+    <button class="theme-toggle" id="themeBtn">テーマ変更</button>
+
+  </header>
+
+
+  <!-- ================================================
+       2. HERO SECTION
+       Full-width café photo with animated catchphrase text.
+  ================================================ -->
+  <section class="hero" id="top">
+
+    <!-- Background image (CSS in style.css handles the photo + zoom animation) -->
+    <div class="hero-bg"></div>
+
+    <!-- Text layered on top of the background image -->
+    <div class="hero-content">
+      <p class="hero-eyebrow">since 2026 · osaka</p>
+      <h1 class="hero-title">朝の光と、<br>一杯のコーヒー。</h1>
+      <p class="hero-sub">静かな時間をお届けする街のカフェ</p>
+    </div>
+
+    <!-- Scroll indicator at the bottom of the hero -->
+    <!-- onclick runs JavaScript inline: smoothly scroll to the About section -->
+    <div
+      class="hero-scroll"
+      onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })"
+    >
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+
+  </section>
+
+
+  <!-- ================================================
+       3. ABOUT SECTION
+       Left column: text description
+       Right column: café photo with badge
+  ================================================ -->
+  <section class="about" id="about">
+    <div class="container">
+
+      <!-- Section heading -->
+      <!-- "reveal" class = fades in when scrolled into view (handled by script.js) -->
+      <div class="section-head reveal">
+        <div class="section-label">About</div>
+        <div class="section-divider"></div>
+      </div>
+
+      <!-- Two-column grid layout -->
+      <!-- "reveal-children" = each direct child fades in with a stagger delay -->
+      <div class="about-inner reveal-children">
+
+        <!-- Left column: text -->
+        <div class="about-text">
+          <p>2026年オープン。豆の香りと木の温もりに包まれた小さな空間で、ゆったりとした時間をお過ごしいただけます。</p>
+          <p>一杯一杯、丁寧に淹れたコーヒーと、季節の食材を使ったフードをご用意しています。</p>
+          <p>お一人でも、ご家族でも、お気軽にどうぞ。</p>
+        </div>
+
+        <!-- Right column: photo with OCC badge -->
+        <div class="about-img-box">
+          <!-- Background image is set via CSS -->
+          <div class="about-img"></div>
+          <!-- Small badge in the bottom-right corner of the photo -->
+          <div class="about-badge">
+            <strong>OCC</strong>
+            one cup of<br>comfort
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       4. MENU SECTION
+       - Recommend banner: click button for a random pick
+       - Menu grid: 5 item cards (3 drinks + 2 food)
+  ================================================ -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+
+      <!-- Section heading -->
+      <div class="section-head reveal">
+        <div class="section-label">Menu</div>
+        <div class="section-divider"></div>
+      </div>
+
+      <!-- Recommend banner (the dashed box) -->
+      <div class="recommend-banner reveal">
+        <h3>今日のおすすめは？</h3>
+        <p>気分が決まらないときは、おまかせで一品ご提案します。</p>
+
+        <!-- Recommend button — id="recommendBtn" so script.js can find it -->
+        <button class="btn-recommend" id="recommendBtn">
+          <!-- SVG icon: a circular refresh arrow drawn with code -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          おすすめを見る
+        </button>
+
+        <!-- Result box: hidden by default, shown by script.js after button click -->
+        <!-- id="recommendResult" → script.js toggles the "show" class on this -->
+        <div class="recommend-result" id="recommendResult">
+          <!-- script.js writes the recommendation text into this paragraph -->
+          <p id="recommendText"></p>
+        </div>
+      </div>
+
+      <!-- Grid of 5 menu cards -->
+      <div class="menu-grid reveal-children">
+
+        <!-- ── Card 1: カフェラテ ── -->
+        <div class="menu-card">
+          <div class="menu-card-img">
+            <!-- loading="lazy" = only load this image when near the viewport (saves bandwidth) -->
+            <img
+              src="https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?w=600&q=70"
+              alt="カフェラテ"
+              loading="lazy"
+            >
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">drink</div>
+            <div class="menu-card-name">カフェラテ</div>
+            <div class="menu-card-desc">深煎りエスプレッソとスチームミルクのやさしい一杯。</div>
+            <div class="menu-card-price">¥ 580</div>
+          </div>
+        </div>
+
+        <!-- ── Card 2: エスプレッソ ── -->
+        <div class="menu-card">
+          <div class="menu-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&q=70"
+              alt="エスプレッソ"
+              loading="lazy"
+            >
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">drink</div>
+            <div class="menu-card-name">エスプレッソ</div>
+            <div class="menu-card-desc">濃縮された豆の風味をストレートで。</div>
+            <div class="menu-card-price">¥ 480</div>
+          </div>
+        </div>
+
+        <!-- ── Card 3: アイスコーヒー ── -->
+        <div class="menu-card">
+          <div class="menu-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1543252450-d979f28729d5?w=600&q=70"
+              alt="アイスコーヒー"
+              loading="lazy"
+            >
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">drink</div>
+            <div class="menu-card-name">アイスコーヒー</div>
+            <div class="menu-card-desc">水出し12時間。すっきりとした冷たさ。</div>
+            <div class="menu-card-price">¥ 550</div>
+          </div>
+        </div>
+
+        <!-- ── Card 4: フレンチトースト ── -->
+        <div class="menu-card">
+          <div class="menu-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=70"
+              alt="フレンチトースト"
+              loading="lazy"
+            >
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">food</div>
+            <div class="menu-card-name">フレンチトースト</div>
+            <div class="menu-card-desc">卵液にひと晩漬けた厚切りブリオッシュ。</div>
+            <div class="menu-card-price">¥ 850</div>
+          </div>
+        </div>
+
+        <!-- ── Card 5: ヨーグルトボウル ── -->
+        <div class="menu-card">
+          <div class="menu-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=70"
+              alt="ヨーグルトボウル"
+              loading="lazy"
+            >
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">food</div>
+            <div class="menu-card-name">ヨーグルトボウル</div>
+            <div class="menu-card-desc">旬のベリーとグラノーラをたっぷりと。</div>
+            <div class="menu-card-price">¥ 720</div>
+          </div>
+        </div>
+
+      </div><!-- end .menu-grid -->
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       5. ACCESS SECTION
+       Left column: address, hours, access info
+       Right column: map placeholder
+  ================================================ -->
+  <section class="access-section" id="access">
+    <div class="container">
+
+      <!-- Section heading -->
+      <div class="section-head reveal">
+        <div class="section-label">Access</div>
+        <div class="section-divider"></div>
+      </div>
+
+      <!-- Two-column grid -->
+      <div class="access-inner reveal-children">
+
+        <!-- Left: info blocks -->
+        <div class="access-info">
+
+          <div class="info-block">
+            <div class="info-label">住所</div>
+            <div class="info-value">
+              大阪府大阪市中央区〇〇 1-2-3<br>
+              OCC Building 1F
+            </div>
+          </div>
+
+          <div class="info-block">
+            <div class="info-label">営業時間</div>
+            <div class="info-value">
+              月〜金　8:00 – 18:00<br>
+              土日祝　9:00 – 17:00
+            </div>
+          </div>
+
+          <div class="info-block">
+            <div class="info-label">定休日</div>
+            <div class="info-value">毎週火曜日</div>
+          </div>
+
+          <div class="info-block">
+            <div class="info-label">アクセス</div>
+            <div class="info-value">地下鉄〇〇駅 徒歩3分</div>
+          </div>
+
+        </div>
+
+        <!-- Right: map placeholder -->
+        <!-- To use a real map, replace this div with a Google Maps <iframe> -->
+        <div class="map-box">
+          <div class="map-pin-icon">📍</div>
+          <div class="map-pin-text">Cafe OCC · 大阪市中央区</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       6. FOOTER
+       Dark bar at the very bottom.
+  ================================================ -->
+  <footer>
+    <div class="footer-logo">Cafe OCC</div>
+    <div class="footer-tagline">one cup of comfort</div>
+
+    <!-- Footer navigation (mirrors the header nav) -->
+    <div class="footer-links">
+      <a href="#top">top</a>
+      <a href="#about">about</a>
+      <a href="#menu">menu</a>
+      <a href="#access">access</a>
+    </div>
+
+    <div class="footer-copy">© 2026 Cafe OCC. All rights reserved.</div>
+  </footer>
+
+
+  <!-- ================================================
+       7. FAB (Floating Action Button)
+       ✏ pencil button pinned to the bottom-left corner.
+  ================================================ -->
+  <button class="fab" title="編集モード">✏</button>
+
+
+  <!-- ================================================
+       Link to our JavaScript file
+       IMPORTANT: placed at the BOTTOM of <body>
+       so that all HTML elements above exist before
+       the script tries to find them with getElementById.
+  ================================================ -->
+  <script src="script.js"></script>
+
+</body>
+</html>
