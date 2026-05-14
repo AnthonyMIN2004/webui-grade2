@@ -1,75 +1,67 @@
 /* =====================================================
-   style.css — All the visual styling for Cafe OCC
-   =====================================================
-   FILE SECTIONS:
-     1. Reset          → remove default browser spacing
-     2. Color Variables → define all colors in one place
-     3. Dark Mode       → override colors when dark class is on
-     4. Base Styles     → font, background, body setup
-     5. Utilities       → reusable helpers (container, section heading)
-     6. Header          → fixed top navigation bar
-     7. Hero            → big image + catchphrase section
-     8. About           → two-column café description section
-     9. Menu            → recommend banner + menu card grid
-    10. Access          → address, hours, map placeholder
-    11. Footer          → dark bottom bar
-    12. FAB             → floating pencil button
-    13. Scroll Reveal   → fade-in animation when scrolling
-    14. Responsive      → mobile layout adjustments
+   style.css - styling for Cafe OCC
+   ctrl+F the section name to jump to it
+
+   1.  RESET
+   2.  COLOR VARIABLES
+   3.  DARK MODE
+   4.  BASE
+   5.  UTILITIES
+   6.  HEADER
+   7.  HERO
+   8.  ABOUT
+   9.  MENU
+  10.  ACCESS
+  11.  FOOTER
+  12.  SCROLL REVEAL
+  13.  RESPONSIVE
    ===================================================== */
 
 
-/* =====================================================
+/* =====================
    1. RESET
-   Browsers add default margins/padding to elements.
-   This removes all of that so we start from scratch.
-===================================================== */
+   remove default browser margin and padding
+   ===================== */
 * {
-  box-sizing: border-box; /* padding is included in width, not added on top */
+  box-sizing: border-box; /* padding stays inside the width, doesnt add on top */
   margin: 0;
   padding: 0;
 }
 
 
-/* =====================================================
-   2. COLOR VARIABLES
-   Define all colors here with names.
-   To change the site's color scheme — just edit this block!
-   Usage example: color: var(--brown);
-===================================================== */
+
+/* 2. COLOR VARIABLES */
+
 :root {
-  --brown:       #6B2D0F;  /* dark brown — main brand color */
-  --brown-light: #8B4513;  /* slightly lighter brown */
-  --gold:        #C8922A;  /* golden accent color */
-  --gold-light:  #E8B84B;  /* lighter gold (used in hero text) */
-  --cream:       #FAF6EE;  /* warm off-white background */
-  --cream-dark:  #F0EBE0;  /* slightly darker cream (menu section bg) */
-  --text-dark:   #2C1A0E;  /* main text (very dark brown) */
-  --text-mid:    #5C3D2E;  /* secondary text (medium brown) */
-  --text-muted:  #8B7355;  /* muted/small text */
-  --nav-height:  60px;     /* height of the fixed top navigation bar */
+  --brown:       #6B2D0F;
+  --brown-light: #8B4513;
+  --gold:        #C8922A;
+  --gold-light:  #E8B84B;
+  --cream:       #FAF6EE;
+  --cream-dark:  #F0EBE0;
+  --text-dark:   #2C1A0E;
+  --text-mid:    #5C3D2E;
+  --text-muted:  #8B7355;
+  --nav-height:  60px;
 }
 
 
-/* =====================================================
-   3. DARK MODE COLORS
-   When JavaScript adds class="dark" to <body>,
-   these values override the :root variables above.
-===================================================== */
+/* =====================
+   3. DARK MODE
+   when JS adds class "dark" to body these override the colors above
+   ===================== */
 body.dark {
-  --cream:      #150C06;  /* very dark background */
+  --cream:      #150C06;
   --cream-dark: #1E110A;
-  --text-dark:  #F0E4D0;  /* light text (readable on dark bg) */
+  --text-dark:  #F0E4D0;
   --text-mid:   #C8A882;
 }
 
 
-/* =====================================================
-   4. BASE STYLES
-   Applied to the whole page.
-===================================================== */
+/* =====================
+   4. BASE
+   ===================== */
 
-/* Smooth scrolling when clicking anchor links like href="#about" */
 html {
   scroll-behavior: smooth;
 }
@@ -78,35 +70,29 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   background-color: var(--cream);
   color: var(--text-dark);
-  overflow-x: hidden; /* no horizontal scrollbar */
-  /* smooth color change when switching dark/light mode */
+  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 
-/* =====================================================
+/* =====================
    5. UTILITIES
-   Reusable helpers used across multiple sections.
-===================================================== */
+   ===================== */
 
-/* Container: centers content and limits max width */
 .container {
-  max-width: 860px;  /* content won't stretch wider than this */
-  margin: 0 auto;    /* center horizontally */
-  padding: 0 2rem;   /* left/right breathing room */
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-/* All sections share the same top/bottom spacing */
 section {
   padding: 5rem 0;
 }
 
-/* Section heading block (used in About, Menu, Access) */
 .section-head {
   margin-bottom: 2.8rem;
 }
 
-/* The big section title text (e.g. "About") */
 .section-label {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2rem;
@@ -115,61 +101,53 @@ section {
   margin-bottom: 0.5rem;
 }
 
-/* The short gold line below the title */
+/* gold line under the section title — grows on hover */
 .section-divider {
   width: 48px;
   height: 2px;
   background-color: var(--gold);
-  /* grows when you hover over the heading */
   transition: width 0.5s ease;
 }
 
-/* Hover: make the gold line grow wider */
 .section-head:hover .section-divider {
   width: 80px;
 }
 
 
-/* =====================================================
+/* =====================
    6. HEADER
-   Fixed top navigation bar.
-   Contains: Logo (left) | Nav links (center) | Button (right)
-===================================================== */
+   fixed top bar — logo | nav | theme button
+   ===================== */
 header {
-  position: fixed;    /* stays at top while you scroll */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;       /* sits on top of other elements */
+  z-index: 100;
   height: var(--nav-height);
   background-color: var(--cream);
   border-bottom: 2px solid var(--brown);
-
-  /* Flexbox: lay out children in a row, spaced apart */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2.5rem;
-
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Shadow added by JavaScript when user scrolls down */
+/* JS adds this class when user scrolls past 40px */
 header.scrolled {
   box-shadow: 0 2px 20px rgba(107, 45, 15, 0.15);
 }
 
-/* "Cafe OCC" logo on the left */
 .nav-logo {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.3rem;
   font-weight: 500;
   color: var(--brown);
   letter-spacing: 0.08em;
-  text-decoration: none; /* no underline */
+  text-decoration: none;
 }
 
-/* Navigation links in the center */
 nav {
   display: flex;
   gap: 2.5rem;
@@ -180,13 +158,12 @@ nav a {
   letter-spacing: 0.18em;
   color: var(--brown-light);
   text-decoration: none;
-  position: relative;    /* needed for the ::after underline trick */
+  position: relative; /* needed for the ::after underline trick below */
   padding-bottom: 2px;
   transition: color 0.3s ease;
 }
 
-/* Invisible underline that slides in on hover */
-/* ::after = a fake element placed after the link text */
+/* underline that slides in on hover using a fake element */
 nav a::after {
   content: '';
   position: absolute;
@@ -195,22 +172,18 @@ nav a::after {
   right: 0;
   height: 1px;
   background-color: var(--gold);
-  transform: scaleX(0);       /* squished to 0 width = invisible */
+  transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.3s ease;
 }
 
-nav a:hover {
-  color: var(--brown);
-}
+nav a:hover { color: var(--brown); }
 
-/* On hover: slide the underline in from the left */
 nav a:hover::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* "テーマ変更" pill button on the right */
 .theme-toggle {
   font-size: 0.68rem;
   letter-spacing: 0.1em;
@@ -219,7 +192,7 @@ nav a:hover::after {
   padding: 6px 16px;
   background: transparent;
   cursor: pointer;
-  border-radius: 20px; /* pill shape */
+  border-radius: 20px;
   font-family: 'Noto Sans JP', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -231,84 +204,71 @@ nav a:hover::after {
 }
 
 
-/* =====================================================
-   7. HERO SECTION
-   Big background image with text overlay.
-   The image is in a separate div so it can animate
-   without moving the text.
-===================================================== */
+/* =====================
+   7. HERO
+   big photo + text overlay
+   photo is in its own div so the zoom doesnt move the text
+   ===================== */
 .hero {
-  margin-top: var(--nav-height); /* push down so fixed header doesn't cover it */
+  margin-top: var(--nav-height);
   height: 420px;
-  position: relative;  /* so child elements can use position: absolute */
+  position: relative;
   overflow: hidden;
-
-  /* center text inside */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-/* The background image layer */
 .hero-bg {
   position: absolute;
-  inset: 0; /* top:0 right:0 bottom:0 left:0 all at once */
-
-  /* dark gradient overlay + café photo */
+  inset: 0;
   background:
-    linear-gradient(to bottom,
+    linear-gradient(
+      to bottom,
       rgba(20, 8, 2, 0.5) 0%,
       rgba(20, 8, 2, 0.2) 50%,
       rgba(20, 8, 2, 0.6) 100%
     ),
-    url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1600&q=70')
-    center / cover no-repeat;
-
-  /* slow zoom animation — cinematic look */
+    url('assets/hero.jpg') center / cover no-repeat;
   animation: heroZoom 12s ease-in-out infinite alternate;
 }
 
-/* Zoom animation: slowly zooms in then back out */
 @keyframes heroZoom {
   from { transform: scale(1.04); }
   to   { transform: scale(1.10); }
 }
 
-/* Text sitting on top of the image */
 .hero-content {
   position: relative;
-  z-index: 2;        /* above the hero-bg layer */
+  z-index: 2; /* above the background photo layer */
   padding: 0 1rem;
 }
 
-/* Small text above the main title e.g. "since 2026 · osaka" */
+/* each element fades up one by one using different delays */
 .hero-eyebrow {
   font-size: 0.68rem;
   letter-spacing: 0.35em;
   color: var(--gold-light);
   text-transform: uppercase;
   margin-bottom: 1.2rem;
-  /* starts invisible, fades in and slides up on page load */
   opacity: 0;
-  animation: fadeUp 0.8s 0.2s forwards; /* 0.2s = delay before starting */
+  animation: fadeUp 0.8s 0.2s forwards;
 }
 
-/* The main big title */
 .hero-title {
   font-family: 'Noto Serif JP', serif;
-  font-size: clamp(1.6rem, 4vw, 2.4rem); /* responsive: min / preferred / max */
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 400;
   color: #ffffff;
   letter-spacing: 0.1em;
   line-height: 1.5;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4); /* subtle shadow for readability */
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
   margin-bottom: 1rem;
   opacity: 0;
-  animation: fadeUp 0.8s 0.45s forwards; /* appears after eyebrow */
+  animation: fadeUp 0.8s 0.45s forwards;
 }
 
-/* Subtitle below the title */
 .hero-sub {
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.7);
@@ -318,12 +278,11 @@ nav a:hover::after {
   animation: fadeUp 0.8s 0.7s forwards;
 }
 
-/* "scroll" indicator at the very bottom of the hero */
 .hero-scroll {
   position: absolute;
   bottom: 1.8rem;
   left: 50%;
-  transform: translateX(-50%); /* perfectly centered */
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -339,7 +298,6 @@ nav a:hover::after {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* The thin vertical line in the scroll indicator */
 .scroll-line {
   width: 1px;
   height: 32px;
@@ -348,7 +306,7 @@ nav a:hover::after {
   overflow: hidden;
 }
 
-/* A golden light that slides down the scroll line endlessly */
+/* gold light that slides down the line endlessly */
 .scroll-line::after {
   content: '';
   position: absolute;
@@ -360,34 +318,25 @@ nav a:hover::after {
   animation: scrollDrop 1.5s 1.2s ease-in-out infinite;
 }
 
-/* Drop animation: moves from above the line to below it */
 @keyframes scrollDrop {
   0%   { top: -100%; }
-  100% { top: 100%; }
+  100% { top:  100%; }
 }
 
-/* Fade in + slide up — used by hero text and scroll indicator */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px); /* start 18px lower */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);    /* end at normal position */
-  }
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 
-/* =====================================================
-   8. ABOUT SECTION
-   Two columns: text description (left) | photo (right)
-===================================================== */
+/* =====================
+   8. ABOUT
+   2-column grid: text left | photo right
+   ===================== */
 .about {
   background-color: var(--cream);
 }
 
-/* CSS Grid: two equal columns side by side */
 .about-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -395,10 +344,9 @@ nav a:hover::after {
   align-items: center;
 }
 
-/* The body text paragraphs */
 .about-text p {
   font-size: 0.88rem;
-  line-height: 2.1;   /* generous line spacing for Japanese */
+  line-height: 2.1;
   color: var(--text-mid);
   margin-bottom: 0.9rem;
 }
@@ -407,30 +355,25 @@ nav a:hover::after {
   margin-bottom: 0;
 }
 
-/* The image container */
 .about-img-box {
   position: relative;
-  aspect-ratio: 4 / 3; /* keeps a fixed width-to-height ratio */
+  aspect-ratio: 4 / 3;
   border-radius: 2px;
   overflow: hidden;
 }
 
-/* The background image inside the box */
 .about-img {
   width: 100%;
   height: 100%;
-  background:
-    url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=70')
-    center / cover no-repeat;
+  background: url('assets/about.jpg') center / cover no-repeat;
   transition: transform 0.6s ease;
 }
 
-/* Zoom image when hovering over the box */
 .about-img-box:hover .about-img {
   transform: scale(1.04);
 }
 
-/* "OCC" badge in the bottom-right corner of the photo */
+/* badge pinned to the bottom right corner of the photo */
 .about-badge {
   position: absolute;
   bottom: 0;
@@ -445,7 +388,6 @@ nav a:hover::after {
   line-height: 1.6;
 }
 
-/* The large "OCC" text inside the badge */
 .about-badge strong {
   display: block;
   font-size: 1.6rem;
@@ -453,16 +395,15 @@ nav a:hover::after {
 }
 
 
-/* =====================================================
-   9. MENU SECTION
-   - Recommend banner at the top (random suggestion)
-   - Grid of 5 menu cards below
-===================================================== */
+/* =====================
+   9. MENU
+   A) recommend banner
+   B) card grid
+   ===================== */
 .menu-section {
   background-color: var(--cream-dark);
 }
 
-/* The dashed box: "今日のおすすめは？" */
 .recommend-banner {
   border: 1.5px dashed rgba(200, 146, 42, 0.4);
   border-radius: 8px;
@@ -481,7 +422,7 @@ body.dark .recommend-banner {
   font-size: 1rem;
   color: var(--text-dark);
   letter-spacing: 0.12em;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .recommend-banner p {
@@ -490,7 +431,6 @@ body.dark .recommend-banner {
   margin-bottom: 1.2rem;
 }
 
-/* "おすすめを見る" brown button */
 .btn-recommend {
   display: inline-flex;
   align-items: center;
@@ -507,38 +447,24 @@ body.dark .recommend-banner {
   transition: background-color 0.3s ease, transform 0.15s;
 }
 
-.btn-recommend:hover {
-  background-color: var(--brown-light);
-}
+.btn-recommend:hover { background-color: var(--brown-light); }
+.btn-recommend:active { transform: scale(0.97); }
 
-/* Tiny "press" effect on click */
-.btn-recommend:active {
-  transform: scale(0.97);
-}
-
-.btn-recommend svg {
-  width: 14px;
-  height: 14px;
-}
-
-/* Result box — hidden by default, shown when JS adds class "show" */
+/* hidden by default — JS adds class "show" to reveal it */
 .recommend-result {
   margin-top: 1rem;
   padding: 1rem 1.2rem;
   background: rgba(107, 45, 15, 0.06);
   border-left: 3px solid var(--gold);
   border-radius: 0 4px 4px 0;
-  display: none; /* hidden! JS will change this to block */
+  display: none;
 }
 
 body.dark .recommend-result {
   background: rgba(200, 146, 42, 0.08);
 }
 
-/* JS adds this class to make the result box visible */
-.recommend-result.show {
-  display: block;
-}
+.recommend-result.show { display: block; }
 
 .recommend-result p {
   font-size: 0.82rem;
@@ -546,40 +472,31 @@ body.dark .recommend-result {
   line-height: 1.9;
 }
 
-.recommend-result strong {
-  color: var(--brown);
-}
+.recommend-result strong { color: var(--brown); }
 
-/* Grid of menu cards */
+/* auto fills columns — 3 on wide screen, less on smaller screens */
 .menu-grid {
   display: grid;
-  /* auto-fill = as many columns as fit */
-  /* minmax(220px, 1fr) = each column min 220px, max equal share */
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.4rem;
 }
 
-/* Single menu card */
 .menu-card {
   background-color: var(--cream);
   border-radius: 6px;
-  overflow: hidden; /* clips image to the card's rounded corners */
+  overflow: hidden;
   box-shadow: 0 1px 8px rgba(60, 20, 0, 0.06);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-body.dark .menu-card {
-  background-color: #251509;
-}
+body.dark .menu-card { background-color: #251509; }
 
-/* Card lifts up and gets a stronger shadow on hover */
 .menu-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 24px rgba(60, 20, 0, 0.12);
 }
 
-/* Image area at the top of the card */
 .menu-card-img {
   aspect-ratio: 4 / 3;
   overflow: hidden;
@@ -588,22 +505,15 @@ body.dark .menu-card {
 .menu-card-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* crop image to fill without stretching */
+  object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
 }
 
-/* Image zooms slightly when hovering the card */
-.menu-card:hover .menu-card-img img {
-  transform: scale(1.06);
-}
+.menu-card:hover .menu-card-img img { transform: scale(1.06); }
 
-/* Text area below the image */
-.menu-card-body {
-  padding: 1rem 1.1rem 1.2rem;
-}
+.menu-card-body { padding: 1rem 1.1rem 1.2rem; }
 
-/* Small label like "drink" or "food" */
 .menu-card-tag {
   font-size: 0.62rem;
   letter-spacing: 0.2em;
@@ -612,7 +522,6 @@ body.dark .menu-card {
   margin-bottom: 0.3rem;
 }
 
-/* Item name */
 .menu-card-name {
   font-family: 'Noto Serif JP', serif;
   font-size: 0.95rem;
@@ -621,7 +530,6 @@ body.dark .menu-card {
   margin-bottom: 0.35rem;
 }
 
-/* Short description */
 .menu-card-desc {
   font-size: 0.73rem;
   color: var(--text-muted);
@@ -629,7 +537,6 @@ body.dark .menu-card {
   margin-bottom: 0.7rem;
 }
 
-/* Price */
 .menu-card-price {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
@@ -637,15 +544,15 @@ body.dark .menu-card {
 }
 
 
-/* =====================================================
-   10. ACCESS SECTION
-   Two columns: info text (left) | map placeholder (right)
-===================================================== */
+/* =====================
+   10. ACCESS
+   2-column grid: info left | map right
+   map column is wider (1.5fr)
+   ===================== */
 .access-section {
   background-color: var(--cream);
 }
 
-/* Two-column grid — info takes less space than the map */
 .access-inner {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -653,12 +560,8 @@ body.dark .menu-card {
   align-items: start;
 }
 
-/* Each info item (address, hours, etc.) */
-.info-block {
-  margin-bottom: 1.8rem;
-}
+.info-block { margin-bottom: 1.8rem; }
 
-/* Small uppercase label above each info item */
 .info-label {
   font-size: 0.62rem;
   letter-spacing: 0.25em;
@@ -667,45 +570,16 @@ body.dark .menu-card {
   margin-bottom: 0.5rem;
 }
 
-/* The actual info text */
 .info-value {
   font-size: 0.86rem;
   line-height: 1.95;
   color: var(--text-mid);
 }
 
-/* Map placeholder box (swap with a real Google Maps iframe later) */
-.map-box {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 6px;
-  overflow: hidden;
-  background-color: var(--cream-dark);
-  border: 1px solid rgba(107, 45, 15, 0.12);
 
-  /* center the pin icon inside */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.map-pin-icon {
-  font-size: 2rem;
-}
-
-.map-pin-text {
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  color: var(--text-muted);
-}
-
-
-/* =====================================================
+/* =====================
    11. FOOTER
-   Dark bar at the very bottom of the page.
-===================================================== */
+   ===================== */
 footer {
   background-color: var(--text-dark);
   color: rgba(240, 228, 210, 0.5);
@@ -713,11 +587,8 @@ footer {
   text-align: center;
 }
 
-body.dark footer {
-  background-color: #0a0503;
-}
+body.dark footer { background-color: #0a0503; }
 
-/* "Cafe OCC" logo in the footer */
 .footer-logo {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.4rem;
@@ -726,7 +597,6 @@ body.dark footer {
   margin-bottom: 0.4rem;
 }
 
-/* Tagline below the footer logo */
 .footer-tagline {
   font-size: 0.68rem;
   letter-spacing: 0.22em;
@@ -734,7 +604,6 @@ body.dark footer {
   margin-bottom: 1.2rem;
 }
 
-/* Navigation links in the footer */
 .footer-links {
   display: flex;
   justify-content: center;
@@ -750,110 +619,65 @@ body.dark footer {
   transition: color 0.2s;
 }
 
-.footer-links a:hover {
-  color: var(--gold);
-}
+.footer-links a:hover { color: var(--gold); }
 
-/* Copyright line */
 .footer-copy {
   font-size: 0.65rem;
   letter-spacing: 0.1em;
 }
 
 
-/* =====================================================
-   12. FAB (Floating Action Button)
-   The ✏ pencil button fixed to the bottom-left corner.
-   It stays visible no matter how far you scroll.
-===================================================== */
-.fab {
-  position: fixed;    /* stuck in place even while scrolling */
-  bottom: 1.6rem;
-  left: 1.6rem;
-  z-index: 300;       /* on top of everything else */
-  width: 46px;
-  height: 46px;
-  border-radius: 50%; /* makes it a circle */
-  background-color: var(--brown);
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(107, 45, 15, 0.35);
-  transition: transform 0.25s, background-color 0.25s;
-}
-
-.fab:hover {
-  background-color: var(--brown-light);
-  transform: scale(1.1) rotate(15deg); /* fun spin on hover */
-}
-
-
-/* =====================================================
-   13. SCROLL REVEAL ANIMATION
-   Elements with class "reveal" start invisible.
-   When JavaScript sees them enter the screen, it adds
-   class "visible" — which triggers this CSS transition.
-===================================================== */
-
-/* Starting state: invisible + shifted 28px down */
+/* =====================
+   12. SCROLL REVEAL
+   elements start invisible — JS adds class "visible" when
+   user scrolls into view — then this fades them in
+   ===================== */
 .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-/* JS adds this → element fades in and slides up */
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Children of .reveal-children each start hidden */
 .reveal-children > * {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Each child appears a little later than the previous one */
+/* stagger effect — each child appears slightly after the previous one */
 .reveal-children.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s;   }
 .reveal-children.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
 .reveal-children.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s; }
 .reveal-children.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.3s; }
 .reveal-children.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.4s; }
 
-/* Spin animation for the recommend button icon */
 @keyframes spin {
-  from { transform: rotate(0deg); }
+  from { transform: rotate(0deg);   }
   to   { transform: rotate(360deg); }
 }
 
 
-/* =====================================================
-   14. RESPONSIVE (Mobile Adjustments)
-   At 720px width or less, switch two-column layouts
-   to single column so things fit on small screens.
-===================================================== */
+/* =====================
+   13. RESPONSIVE
+  ==================== */
 @media (max-width: 720px) {
 
-  /* Stack About and Access columns vertically */
   .about-inner,
   .access-inner {
     grid-template-columns: 1fr;
   }
 
-  /* On mobile: show the image above the text in About */
-  .about-img-box {
-    order: -1;
-  }
+  /* show photo above text on mobile */
+  .about-img-box { order: -1; }
 
-  header    { padding: 0 1.2rem; }
-  nav       { gap: 1.5rem; }
-  .hero     { height: 320px; }
+  header     { padding: 0 1.2rem; }
+  nav        { gap: 1.5rem; }
+  .hero      { height: 320px; }
   .container { padding: 0 1.2rem; }
-  section   { padding: 3.5rem 0; }
+  section    { padding: 3.5rem 0; }
 }

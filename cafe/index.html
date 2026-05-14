@@ -1,85 +1,65 @@
 <!DOCTYPE html>
-<!-- 
-  =====================================================
-  index.html — The main HTML structure for Cafe OCC
-  =====================================================
-  This file contains only the content (structure).
-  Styling  → style.css   (linked in <head>)
-  Behavior → script.js   (linked at bottom of <body>)
 
-  PAGE SECTIONS:
-    1. Header   → fixed top bar (logo + nav + theme button)
-    2. Hero     → big photo + catchphrase
-    3. About    → café concept text + photo
-    4. Menu     → recommend banner + 5 menu cards
-    5. Access   → address, hours, map
-    6. Footer   → bottom bar with links + copyright
-    7. FAB      → floating pencil button (bottom-left)
-  =====================================================
--->
 <html lang="ja">
 
 <head>
-  <!-- Page settings -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cafe OCC</title>
+   <script src="script.js" defer></script>
 
+ <!-- icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
+  <!-- fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&display=swap"
     rel="stylesheet"
-  >
+  />
 
-  
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- ================================================
+  <!-- =====================
        1. HEADER
-       Fixed top bar. Stays visible while scrolling.
-       Contains: Logo (left) | Nav links (center) | Theme button (right)
-  ================================================ -->
+       fixed top bar — stays visible while scrolling
+       ===================== -->
   <header id="site-header">
 
-    <!-- Logo — clicking takes you back to the top of the page -->
+    <!-- logo — clicks back to top -->
     <a class="nav-logo" href="#top">Cafe OCC</a>
 
-    <!-- Navigation links -->
-    <!-- href="#about" = jump to the element with id="about" -->
+    <!-- nav links -->
     <nav>
       <a href="#about">about</a>
       <a href="#menu">menu</a>
       <a href="#access">access</a>
     </nav>
 
-    <!-- Dark/light mode toggle button -->
-    <!-- id="themeBtn" → JavaScript in script.js listens for clicks on this -->
+    <!-- dark/light mode toggle — script.js handles the click -->
     <button class="theme-toggle" id="themeBtn">テーマ変更</button>
 
   </header>
 
 
-  <!-- ================================================
-       2. HERO SECTION
-       Full-width café photo with animated catchphrase text.
-  ================================================ -->
+  <!-- =====================
+       2. HERO
+       big photo + catchphrase
+       ===================== -->
   <section class="hero" id="top">
 
-    <!-- Background image (CSS in style.css handles the photo + zoom animation) -->
+    <!-- photo in its own div so the zoom animation doesnt move the text -->
     <div class="hero-bg"></div>
 
-    <!-- Text layered on top of the background image -->
     <div class="hero-content">
       <p class="hero-eyebrow">since 2026 · osaka</p>
-      <h1 class="hero-title">朝の光と、<br>一杯のコーヒー。</h1>
+      <h1 class="hero-title">朝の光と、<br />一杯のコーヒー。</h1>
       <p class="hero-sub">静かな時間をお届けする街のカフェ</p>
     </div>
 
-    <!-- Scroll indicator at the bottom of the hero -->
-    <!-- onclick runs JavaScript inline: smoothly scroll to the About section -->
+    <!-- clicks smoothly scroll down to About -->
     <div
       class="hero-scroll"
       onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })"
@@ -91,40 +71,32 @@
   </section>
 
 
-  <!-- ================================================
-       3. ABOUT SECTION
-       Left column: text description
-       Right column: café photo with badge
-  ================================================ -->
+  <!-- =====================
+       3. ABOUT
+       left: text / right: photo
+       ===================== -->
   <section class="about" id="about">
     <div class="container">
 
-      <!-- Section heading -->
-      <!-- "reveal" class = fades in when scrolled into view (handled by script.js) -->
       <div class="section-head reveal">
         <div class="section-label">About</div>
         <div class="section-divider"></div>
       </div>
 
-      <!-- Two-column grid layout -->
-      <!-- "reveal-children" = each direct child fades in with a stagger delay -->
+      <!-- reveal-children = each child fades in one by one on scroll -->
       <div class="about-inner reveal-children">
 
-        <!-- Left column: text -->
         <div class="about-text">
           <p>2026年オープン。豆の香りと木の温もりに包まれた小さな空間で、ゆったりとした時間をお過ごしいただけます。</p>
           <p>一杯一杯、丁寧に淹れたコーヒーと、季節の食材を使ったフードをご用意しています。</p>
           <p>お一人でも、ご家族でも、お気軽にどうぞ。</p>
         </div>
 
-        <!-- Right column: photo with OCC badge -->
         <div class="about-img-box">
-          <!-- Background image is set via CSS -->
           <div class="about-img"></div>
-          <!-- Small badge in the bottom-right corner of the photo -->
           <div class="about-badge">
             <strong>OCC</strong>
-            one cup of<br>comfort
+            one cup of<br />comfort
           </div>
         </div>
 
@@ -133,55 +105,42 @@
   </section>
 
 
-  <!-- ================================================
-       4. MENU SECTION
-       - Recommend banner: click button for a random pick
-       - Menu grid: 5 item cards (3 drinks + 2 food)
-  ================================================ -->
+  <!-- =====================
+       4. MENU
+       A) random recommend box
+       B) 5 menu cards
+       ===================== -->
   <section class="menu-section" id="menu">
     <div class="container">
 
-      <!-- Section heading -->
       <div class="section-head reveal">
         <div class="section-label">Menu</div>
         <div class="section-divider"></div>
       </div>
 
-      <!-- Recommend banner (the dashed box) -->
+      <!-- A) recommend banner — script.js handles the random pick -->
       <div class="recommend-banner reveal">
         <h3>今日のおすすめは？</h3>
         <p>気分が決まらないときは、おまかせで一品ご提案します。</p>
 
-        <!-- Recommend button — id="recommendBtn" so script.js can find it -->
         <button class="btn-recommend" id="recommendBtn">
-          <!-- SVG icon: a circular refresh arrow drawn with code -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 4 23 10 17 10"/>
-            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
-          </svg>
+          <i class="fa-solid fa-rotate-right"></i>
           おすすめを見る
         </button>
 
-        <!-- Result box: hidden by default, shown by script.js after button click -->
-        <!-- id="recommendResult" → script.js toggles the "show" class on this -->
+        <!-- hidden by default, script.js adds class "show" to reveal it -->
         <div class="recommend-result" id="recommendResult">
-          <!-- script.js writes the recommendation text into this paragraph -->
           <p id="recommendText"></p>
         </div>
       </div>
 
-      <!-- Grid of 5 menu cards -->
+      <!-- B) menu cards -->
       <div class="menu-grid reveal-children">
 
-        <!-- ── Card 1: カフェラテ ── -->
+        <!-- card 1 -->
         <div class="menu-card">
           <div class="menu-card-img">
-            <!-- loading="lazy" = only load this image when near the viewport (saves bandwidth) -->
-            <img
-              src="https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?w=600&q=70"
-              alt="カフェラテ"
-              loading="lazy"
-            >
+            <img src="assets/latte.jpg" alt="カフェラテ" loading="lazy" />
           </div>
           <div class="menu-card-body">
             <div class="menu-card-tag">drink</div>
@@ -191,14 +150,10 @@
           </div>
         </div>
 
-        <!-- ── Card 2: エスプレッソ ── -->
+        <!-- card 2 -->
         <div class="menu-card">
           <div class="menu-card-img">
-            <img
-              src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&q=70"
-              alt="エスプレッソ"
-              loading="lazy"
-            >
+            <img src="assets/espresso.jpg" alt="エスプレッソ" loading="lazy" />
           </div>
           <div class="menu-card-body">
             <div class="menu-card-tag">drink</div>
@@ -208,14 +163,10 @@
           </div>
         </div>
 
-        <!-- ── Card 3: アイスコーヒー ── -->
+        <!-- card 3 -->
         <div class="menu-card">
           <div class="menu-card-img">
-            <img
-              src="https://images.unsplash.com/photo-1543252450-d979f28729d5?w=600&q=70"
-              alt="アイスコーヒー"
-              loading="lazy"
-            >
+            <img src="assets/iced-coffee.jpg" alt="アイスコーヒー" loading="lazy" />
           </div>
           <div class="menu-card-body">
             <div class="menu-card-tag">drink</div>
@@ -225,14 +176,10 @@
           </div>
         </div>
 
-        <!-- ── Card 4: フレンチトースト ── -->
+        <!-- card 4 -->
         <div class="menu-card">
           <div class="menu-card-img">
-            <img
-              src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=70"
-              alt="フレンチトースト"
-              loading="lazy"
-            >
+            <img src="assets/french-toast.jpg" alt="フレンチトースト" loading="lazy" />
           </div>
           <div class="menu-card-body">
             <div class="menu-card-tag">food</div>
@@ -242,14 +189,10 @@
           </div>
         </div>
 
-        <!-- ── Card 5: ヨーグルトボウル ── -->
+        <!-- card 5 -->
         <div class="menu-card">
           <div class="menu-card-img">
-            <img
-              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=70"
-              alt="ヨーグルトボウル"
-              loading="lazy"
-            >
+            <img src="assets/yogurt-bowl.jpg" alt="ヨーグルトボウル" loading="lazy" />
           </div>
           <div class="menu-card-body">
             <div class="menu-card-tag">food</div>
@@ -259,44 +202,40 @@
           </div>
         </div>
 
-      </div><!-- end .menu-grid -->
+      </div>
     </div>
   </section>
 
 
-  <!-- ================================================
-       5. ACCESS SECTION
-       Left column: address, hours, access info
-       Right column: map placeholder
-  ================================================ -->
+  <!-- =====================
+       5. ACCESS
+       left: address/hours / right: google map
+       ===================== -->
   <section class="access-section" id="access">
     <div class="container">
 
-      <!-- Section heading -->
       <div class="section-head reveal">
         <div class="section-label">Access</div>
         <div class="section-divider"></div>
       </div>
 
-      <!-- Two-column grid -->
       <div class="access-inner reveal-children">
 
-        <!-- Left: info blocks -->
         <div class="access-info">
 
           <div class="info-block">
             <div class="info-label">住所</div>
             <div class="info-value">
-              大阪府大阪市中央区〇〇 1-2-3<br>
-              OCC Building 1F
+              <p>大阪府大阪市中央区〇〇 1-2-3</p>
+              <p>OCC Building 1F</p>
             </div>
           </div>
 
           <div class="info-block">
             <div class="info-label">営業時間</div>
             <div class="info-value">
-              月〜金　8:00 – 18:00<br>
-              土日祝　9:00 – 17:00
+              <p>月〜金　8:00 - 18:00</p>
+              <p>土日祝　9:00 - 17:00</p>
             </div>
           </div>
 
@@ -312,27 +251,28 @@
 
         </div>
 
-        <!-- Right: map placeholder -->
-        <!-- To use a real map, replace this div with a Google Maps <iframe> -->
-        <div class="map-box">
-          <div class="map-pin-icon">📍</div>
-          <div class="map-pin-text">Cafe OCC · 大阪市中央区</div>
-        </div>
+        <!-- google maps embed -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.7065459242694!2d135.50506027592496!3d34.63685538663557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000ddeb133356c5%3A0xf548daf444af075d!2sOsaka%20Christian%20College!5e0!3m2!1sen!2sjp!4v1778728174424!5m2!1sen!2sjp"
+          width="100%"
+          height="300"
+          style="border:0; border-radius:6px;"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
 
       </div>
     </div>
   </section>
 
 
-  <!-- ================================================
+  <!-- =====================
        6. FOOTER
-       Dark bar at the very bottom.
-  ================================================ -->
+       ===================== -->
   <footer>
     <div class="footer-logo">Cafe OCC</div>
     <div class="footer-tagline">one cup of comfort</div>
 
-    <!-- Footer navigation (mirrors the header nav) -->
     <div class="footer-links">
       <a href="#top">top</a>
       <a href="#about">about</a>
@@ -344,20 +284,8 @@
   </footer>
 
 
-  <!-- ================================================
-       7. FAB (Floating Action Button)
-       ✏ pencil button pinned to the bottom-left corner.
-  ================================================ -->
-  <button class="fab" title="編集モード">✏</button>
-
-
-  <!-- ================================================
-       Link to our JavaScript file
-       IMPORTANT: placed at the BOTTOM of <body>
-       so that all HTML elements above exist before
-       the script tries to find them with getElementById.
-  ================================================ -->
-  <script src="script.js"></script>
+  <!-- script.js at the bottom  -->
+   
 
 </body>
 </html>
