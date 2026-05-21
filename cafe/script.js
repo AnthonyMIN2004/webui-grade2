@@ -12,7 +12,7 @@
 /* =====================
    1. DARK / LIGHT MODE
    toggles class "dark" on body
-   saves the choice so it stays the same after refresh
+   saves the choice so it stays the same after refreshzxxx
    ===================== */
 
 const themeBtn = document.getElementById('themeBtn');
