@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poke API</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>焼肉食べたい？</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Section 1: ピカチュウの情報を取得する -->
-   <section>
-        <input id="name" placeholder="ポケモン名を入力">
-        <button id="section1-btn">検索</button>
-        <p id="section1-result"></p>
-    </section>
-    <script src="script.js"></script>
+  <main class="stage" id="stage">
+    <div class="stage__inner" id="askView">
+      <div class="stage__emoji" aria-hidden="true">🥩🔥</div>
+      <h1 class="stage__title">焼肉食べたい？</h1>
+      <p class="stage__taunt" id="taunt" aria-live="polite"></p>
+      <div class="stage__buttons">
+        <button class="btn" id="yesBtn" type="button">はい！</button>
+        <button class="btn" id="noBtn" type="button">いいえ</button>
+      </div>
+    </div>
+
+    <div class="stage__inner stage__inner--hidden" id="winView">
+      <div class="stage__emoji" aria-hidden="true">🎉🥩🎉</div>
+      <h1 class="stage__title">やった！焼肉だ！</h1>
+      <p class="stage__taunt">正解です。焼肉に「いいえ」という選択肢は最初からなかった。</p>
+      <div class="shops" id="shopList" aria-live="polite"></div>
+      <button class="btn btn--ghost" id="retryBtn" type="button">もう一回聞く</button>
+    </div>
+  </main>
+
+  <p class="credit">Photo: Unsplash</p>
+
+  <script src="script.js"></script>
 </body>
 </html>
