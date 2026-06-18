@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ジャンケン · ジェスチャーアーケード</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="cabinet">
+      <header class="marquee">
+        <h1 class="marquee__title">
+          ジャンケン
+        </h1>
+        <p class="marquee__sub">ジェスチャーアーケード — カメラに手を見せてね</p>
+      </header>
+
+      <div class="scoreboard" aria-label="Scoreboard">
+        <div class="led led--you">
+          <span class="led__label">あなた</span>
+          <span class="led__digit" id="user-score">0</span>
+        </div>
+        <div class="led led--cpu">
+          <span class="led__label">CPU</span>
+          <span class="led__digit" id="cpu-score">0</span>
+        </div>
+      </div>
+
+      <div class="screens">
+        <section class="screen screen--player">
+          <span class="screen__tag">プレイヤー</span>
+          <div class="crt" id="player-crt">
+            <div id="webcam-container" class="crt__media"></div>
+            <div class="crt__scanlines" aria-hidden="true"></div>
+          </div>
+        </section>
+
+        <div class="vs" aria-hidden="true">VS</div>
+        <section class="screen screen--cpu">
+          <span class="screen__tag">CPU</span>
+          <div class="crt crt--cpu">
+            <span id="cpu-display" style="font-size: 4rem">🤖</span>
+            <div class="crt__scanlines" aria-hidden="true"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="result-banner" id="result">スタートを押して開始</div>
+
+      <div class="controls">
+        <button type="button" class="btn btn--start" onclick="init()">
+          ⏻ 1. カメラを起動
+        </button>
+        <button
+          id="play-btn"
+          type="button"
+          class="btn btn--play"
+          onclick="playGame()"
+          disabled
+        >
+          ✊ 2. 勝負する！
+        </button>
+      </div>
+
+      <details class="diagnostics">
+        <summary>モデルの認識状況</summary>
+        <div id="label-container" class="diagnostics__bars"></div>
+      </details>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="script.js"></script>
+    <script src="UI.js"></script>
+  </body>
+</html>

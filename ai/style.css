@@ -1,0 +1,226 @@
+:root {
+  --bg-void: #0b0e1a;
+  --panel: #141a2e;
+  --panel-raised: #1c2440;
+  --rock: #ffb347;
+  --paper: #4dd9e8;
+  --scissors: #ff4fa3;
+  --cream: #f4efe6;
+  --cream-dim: #a8a4c4;
+  --led-green: #39ff88;
+  --led-red: #ff5252;
+  --font-display: 'Press Start 2P', monospace;
+  --font-body: 'Space Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: radial-gradient(circle at 50% -10%, #1a2140 0%, var(--bg-void) 55%, #050611 100%);
+  color: var(--cream);
+  font-family: var(--font-body);
+  display: flex;
+  justify-content: center;
+  padding: 24px 14px 48px;
+}
+
+.cabinet {
+  width: 100%;
+  max-width: 760px;
+  background: linear-gradient(180deg, var(--panel-raised), var(--panel));
+  border: 3px solid #2a3360;
+  border-radius: 22px;
+  padding: 22px 22px 26px;
+  box-shadow:
+    0 0 0 6px #060815,
+    0 20px 50px -10px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* ---------- Marquee ---------- */
+.marquee { text-align: center; margin-bottom: 18px; }
+.marquee__title {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 4vw, 1.5rem);
+  margin: 0 0 8px;
+  letter-spacing: 1px;
+  color: var(--cream);
+  text-shadow:
+    0 0 6px rgba(244,239,230,0.5),
+    0 0 18px rgba(77,217,232,0.35);
+}
+.marquee__sub {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--cream-dim);
+}
+
+/* ---------- Scoreboard ---------- */
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.led {
+  background: #060815;
+  border: 2px solid #2a3360;
+  border-radius: 10px;
+  padding: 8px 16px;
+  text-align: center;
+  min-width: 84px;
+}
+.led__label {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  color: var(--cream-dim);
+  margin-bottom: 4px;
+}
+.led__digit {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  transition: transform 0.15s ease;
+}
+.led--you .led__digit { color: var(--led-green); text-shadow: 0 0 10px rgba(57,255,136,0.6); }
+.led--cpu .led__digit { color: var(--scissors); text-shadow: 0 0 10px rgba(255,79,163,0.6); }
+.led__digit.bump { transform: scale(1.35); }
+
+/* ---------- Screens ---------- */
+.screens {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.screen__tag {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  color: var(--cream-dim);
+}
+.vs {
+  font-family: var(--font-display);
+  color: var(--cream-dim);
+  font-size: 0.85rem;
+}
+
+.crt {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 220px;
+  background: #04060d;
+  border: 3px solid #2a3360;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.85);
+  transition: box-shadow 0.25s ease;
+}
+.crt__media { width: 100%; height: 100%; display: flex; }
+.crt__media canvas { width: 100% !important; height: 100% !important; object-fit: cover; }
+
+.crt__scanlines {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.05) 0px,
+    rgba(255,255,255,0.05) 1px,
+    transparent 2px,
+    transparent 3px
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.crt--cpu { display: flex; align-items: center; justify-content: center; }
+.cpu-face {
+  font-size: 4.2rem;
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.6));
+}
+
+/* glow ring colors applied by ui-effects.js based on the result text */
+.glow-win { box-shadow: inset 0 0 30px rgba(0,0,0,0.85), 0 0 22px 2px var(--led-green) !important; }
+.glow-lose { box-shadow: inset 0 0 30px rgba(0,0,0,0.85), 0 0 22px 2px var(--led-red) !important; }
+.glow-tie { box-shadow: inset 0 0 30px rgba(0,0,0,0.85), 0 0 22px 2px var(--cream-dim) !important; }
+
+/* ---------- Result banner (this IS #result — your script writes its text) ---------- */
+.result-banner {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 2.6vw, 0.95rem);
+  line-height: 1.6;
+  min-height: 1.6em;
+  margin: 4px 0 10px;
+  padding: 10px 12px;
+  background: #060815;
+  border: 2px solid #2a3360;
+  border-radius: 10px;
+  color: var(--cream);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.result-banner.is-win { color: var(--led-green); border-color: var(--led-green); text-shadow: 0 0 14px rgba(57,255,136,0.5); }
+.result-banner.is-lose { color: var(--led-red); border-color: var(--led-red); text-shadow: 0 0 14px rgba(255,82,82,0.5); }
+.result-banner.is-tie { color: var(--cream-dim); }
+
+/* ---------- Controls ---------- */
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 14px 0 6px;
+}
+.btn {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: var(--cream);
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 5px 0 0 rgba(0,0,0,0.4), 0 8px 14px rgba(0,0,0,0.4);
+  transform: translateY(0);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.2s ease;
+}
+.btn:active { transform: translateY(4px); box-shadow: 0 1px 0 0 rgba(0,0,0,0.4); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn:focus-visible { outline: 3px solid var(--cream); outline-offset: 2px; }
+
+.btn--start { background: linear-gradient(180deg, #4dd9e8, #2aa9c2); }
+.btn--play { background: linear-gradient(180deg, #ff4fa3, #c9277c); }
+
+/* ---------- Diagnostics ---------- */
+.diagnostics {
+  margin: 14px auto 0;
+  max-width: 420px;
+  font-size: 0.7rem;
+  color: var(--cream-dim);
+}
+.diagnostics summary { cursor: pointer; text-align: center; }
+.diagnostics__bars { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+.diagnostics__bars div { font-size: 0.65rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .screens { grid-template-columns: 1fr; }
+  .vs { display: none; }
+  .crt { max-width: 280px; margin: 0 auto; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .btn, .led__digit, .crt, .result-banner { transition: none; }
+}
